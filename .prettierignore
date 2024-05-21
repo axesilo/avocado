@@ -1,0 +1,5 @@
+# Note that Prettier by default ignores .git, .svn, .hg as well as things in .gitignore, so only
+# files/directories outside that spec need to be added here.
+yarn.lock
+package-lock.json
+pnpm-lock.yaml

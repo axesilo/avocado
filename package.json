@@ -1,0 +1,31 @@
+{
+  "name": "@axesilo/avocado",
+  "version": "0.1.0",
+  "description": "A simplified interface to the MongoDB Node.js driver with best practices built in.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axesilo/avocado.git"
+  },
+  "keywords": [
+    "mongodb"
+  ],
+  "author": "David Carroll https://github.com/axesilo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/axesilo/avocado/issues"
+  },
+  "homepage": "https://github.com/axesilo/avocado#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/format": "^19.3.0",
+    "@commitlint/types": "^19.0.3",
+    "husky": "^9.0.11",
+    "prettier": "3.2.5"
+  }
+}

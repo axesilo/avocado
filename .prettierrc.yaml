@@ -1,0 +1,7 @@
+overrides:
+  - files: "*.yaml"
+    options:
+      printWidth: 240
+proseWrap: always
+tabWidth: 2
+printWidth: 100
