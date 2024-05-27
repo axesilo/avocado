@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+import { MongoClient, ServerApiVersion, type Db as BaseDb } from "mongodb";
 
 // Contrary to to what the README says, this isn't necessarily good code yet.
 // It's a placeholder to get the project scaffolded.
@@ -15,14 +15,15 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
  * - `AVOCADO_MONGODB_DATABASE_NAME`: The name of the database repesented by the class.
  *   If not set, the default database from the connection string is used.
  */
-class Db {
+export class Db {
   // The MongoClient manages the connection pool, so ideally, there should be one per application.
   // See https://www.mongodb.com/docs/manual/administration/connection-pool-overview/.
-  static #client = null;
+  private static client: MongoClient | null = null;
 
-  static #getDb() {
-    if (Db.#client == null) {
-      Db.#client = new MongoClient(process.env.AVOCADO_MONGODB_CONNECTION_STRING, {
+  private static getDb(): BaseDb {
+    if (Db.client == null) {
+      // TODO: local in-memory database
+      Db.client = new MongoClient(process.env.AVOCADO_MONGODB_CONNECTION_STRING ?? "", {
         serverApi: {
           version: ServerApiVersion.v1,
           // Allow only commands in the Stable API
@@ -32,21 +33,19 @@ class Db {
       });
     }
 
-    return Db.#client.db(process.env.AVOCADO_MONGODB_DATABASE_NAME);
+    return Db.client.db(process.env.AVOCADO_MONGODB_DATABASE_NAME);
   }
 
-  #db;
+  private db: BaseDb;
 
   constructor() {
-    this.#db = Db.#getDb();
+    this.db = Db.getDb();
   }
 
   /**
    * Get a Promise that resolves to an array of all documents in a collection.
    */
-  getMany(collectionName) {
-    return this.#db.collection(collectionName).find({}).toArray();
+  getMany(collectionName: string) {
+    return this.db.collection(collectionName).find({}).toArray();
   }
 }
-
-module.exports = { Db };

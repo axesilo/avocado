@@ -1,5 +1,12 @@
 # Backlog
 
+## Publishing
+
+- [ ] Make a separate build script so the package doesn't pull down unnecessary stuff
+- [ ] Test the build script
+- [ ] Set up basic TypeScript experience
+- [ ] Generate type files as part of the build
+
 ## Developer Experience
 
 - [ ] Test and update commit hooks

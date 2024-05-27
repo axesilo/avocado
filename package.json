@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky",
+    "clean": "rm -rf dist",
+    "build": "tsc",
+    "build:prod": "npm run clean && tsc -p tsconfig.prod.json && cp package.json README.md LICENSE dist/"
   },
   "repository": {
     "type": "git",
@@ -25,10 +28,14 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/format": "^19.3.0",
     "@commitlint/types": "^19.0.3",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.12.12",
     "husky": "^9.0.11",
-    "prettier": "3.2.5"
+    "prettier": "3.2.5",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "mongodb": "^6.6.2"
-  }
+  },
+  "types": "index.d.ts"
 }
