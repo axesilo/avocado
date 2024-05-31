@@ -1,7 +1,7 @@
 {
   "name": "@axesilo/avocado",
-  "version": "0.2.0",
-  "description": "A simplified interface to the MongoDB Node.js driver with best practices built in.",
+  "version": "0.3.0",
+  "description": "A simplified interface to the MongoDB Node.js driver.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

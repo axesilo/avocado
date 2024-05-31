@@ -17,3 +17,7 @@
 ## Primary Db Class
 
 - [ ] Look into if anything should be done for connection cleanup
+
+## Other
+
+- [ ] Permissions checking on the MongoDB side
