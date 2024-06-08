@@ -1,14 +1,19 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@tsconfig/node20/tsconfig.json",
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "compilerOptions": {
     "outDir": "dist",
     "incremental": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "target": "ES6",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true
   }
 }
