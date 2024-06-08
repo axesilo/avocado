@@ -15,3 +15,9 @@ new Db()
   })
   .catch(console.error);
 ```
+
+## Philosophy
+
+- Bias for the most common operations, setting reasonable defaults.
+- Use flexible types and class-based patterns over generics and strict typing. One of the advantages
+  of using a NoSQL document store like MongoDB (over a relational database, say) is its flexibility.

@@ -1,12 +1,7 @@
-import {
-  MongoClient,
-  ServerApiVersion,
-  type Db as BaseDb,
-  type ObjectId as MongoObjectId,
-} from "mongodb";
+import { MongoClient, ServerApiVersion, type Db as BaseDb, ObjectId } from "mongodb";
+export { ObjectId } from "mongodb";
 
 // TODO: be more explicit about the default if no connection string is set
-// TODO: add a Connection class
 
 /**
  * A MongoDB database connection.
@@ -19,7 +14,7 @@ import {
  *
  * Example usage:
  * ```typescript
- * const projects: Array<Project> = await new Db().getAll("projects");
+ * const projects = await new Db().getAll("projects");
  * console.log(projects);
  * ```
  */
@@ -57,11 +52,37 @@ export class Db {
   /**
    * Get an array of all documents in a collection.
    */
-  async getAll<T extends Document>(collectionName: string): Promise<Array<T>> {
-    return (await this.db.collection<T>(collectionName).find({}).toArray()) as Array<T>;
+  async getAll(collectionName: string): Promise<Array<Document>> {
+    return await this.db.collection(collectionName).find({}).toArray();
+  }
+
+  /**
+   * Create a new document in a collection and return its ID.
+   */
+  async create(collectionName: string, document: DocumentWithoutId): Promise<ObjectId> {
+    // The driver will mutate the document object that is passed in, so make a clone.
+    const documentClone = { ...document };
+
+    // forceServerObjectId should default to false, but make it explicit so that we are guaranteed
+    // that the driver knows the inserted _id
+    const result = await this.db.collection(collectionName).insertOne(documentClone, {
+      forceServerObjectId: false,
+    });
+
+    return result.insertedId;
+  }
+
+  /**
+   * Delete a document from a collection, returning `true` if the delete was successful.
+   *
+   * If no document with the given ID is found, this method returns `false`.
+   */
+  async delete(collectionName: string, documentId: ObjectId): Promise<boolean> {
+    return (
+      (await this.db.collection(collectionName).deleteOne({ _id: documentId })).deletedCount === 1
+    );
   }
 }
 
-// Re-export types from MongoDB
+export type DocumentWithoutId = { [key: string]: any } & { _id: never };
 export type Document = { [key: string]: any } & { _id: ObjectId };
-export type ObjectId = MongoObjectId;
