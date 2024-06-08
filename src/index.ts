@@ -1,1 +1,1 @@
-export { Db, type Document, ObjectId } from "./Db";
+export { Db, type Document, type DocumentWithoutId, ObjectId } from "./Db";
