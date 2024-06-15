@@ -1,0 +1,13 @@
+{
+  "name": "avocado-e2e-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "private": true,
+  "dependencies": {
+    "@axesilo/avocado": "file:../../dist",
+    "vitest": "^1.6.0"
+  }
+}

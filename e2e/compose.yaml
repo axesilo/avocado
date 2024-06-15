@@ -1,0 +1,16 @@
+name: axesilo-avocado-e2e
+services:
+  # https://www.mongodb.com/resources/products/compatibilities/docker
+  mongodb:
+    image: mongodb/mongodb-community-server
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=e2euser
+      - MONGO_INITDB_ROOT_PASSWORD=e2epassword
+  # test-runner:
+  #   build: ./tests/
+  #   environment:
+  #     - AVOCADO_MONGODB_CONNECTION_STRING=mongodb://e2euser:e2epassword@mongodb:27018/testdb?authSource=admin
+  #   depends_on:
+  #     - mongodb
