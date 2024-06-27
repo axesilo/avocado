@@ -38,7 +38,7 @@ export class Db {
     return Db.client.db(dbName ?? undefined);
   }
 
-  private db: BaseDb;
+  private readonly db: BaseDb;
 
   /**
    * Create a new database connection.
@@ -84,6 +84,28 @@ export class Db {
       forceServerObjectId: false,
     });
     return result.insertedIds;
+  }
+
+  /**
+   * Update a document in a collection, applying a list of field writes.
+   *
+   * Example usage:
+   *
+   * ```js
+   * db.update("projects", myId, ["status", "DONE"], ["points", 2.0]);
+   * ```
+   */
+  async update(collectionName: string, documentId: ObjectId, ...fieldWrites: Array<[string, any]>) {
+    if (fieldWrites.length === 0) {
+      return;
+    }
+    const setExpression: Record<string, any> = {};
+    for (const [key, value] of fieldWrites) {
+      setExpression[key] = value;
+    }
+    await this.db
+      .collection(collectionName)
+      .updateOne({ _id: documentId }, { $set: setExpression });
   }
 
   /**
