@@ -73,6 +73,20 @@ export class Db {
   }
 
   /**
+   * Batch-create multiple documents in a collection and return a map of array indexes to IDs.
+   */
+  async createMany(
+    collectionName: string,
+    documents: Array<DocumentWithoutId>,
+  ): Promise<{ [key: number]: ObjectId }> {
+    const documentsClone = documents.map((document) => ({ ...document }));
+    const result = await this.db.collection(collectionName).insertMany(documentsClone, {
+      forceServerObjectId: false,
+    });
+    return result.insertedIds;
+  }
+
+  /**
    * Delete a document from a collection, returning `true` if the delete was successful.
    *
    * If no document with the given ID is found, this method returns `false`.
